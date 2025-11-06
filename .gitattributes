@@ -1,0 +1,2 @@
+AMCJ_prof-1024x1024.png filter=lfs diff=lfs merge=lfs -text
+Patches/AMCJ_prof-1024x1024.png filter=lfs diff=lfs merge=lfs -text
