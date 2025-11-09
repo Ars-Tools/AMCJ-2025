@@ -26,31 +26,13 @@ typedef struct {
     intptr_t moment;
     intptr_t cursor;
 } t_pitchshift;
-static inline void zabs(double const * __nonnull const r,
-                        double const * __nonnull const i,
-                        double       * __nonnull const a,
-                        intptr_t const length) {
-    vDSP_zvabsD(&(DSPDoubleSplitComplex const) {
-        .realp=(double*__nonnull const)r,
-        .imagp=(double*__nonnull const)i
-    }, 1, a, 1, length);
-}
-static inline void zarg(double const * __nonnull const r,
-                        double const * __nonnull const i,
-                        double       * __nonnull const a,
-                        intptr_t const length) {
-    vDSP_zvphasD(&(DSPDoubleSplitComplex const) {
-        .realp=(double*__nonnull const)r,
-        .imagp=(double*__nonnull const)i
-    }, 1, a, 1, length);
-}
 C74_HIDDEN t_class const * class = NULL;
 C74_HIDDEN t_pitchshift const*const new(t_symbol const*const symbol, short const argc, t_atom*const argv) {
 	register t_pitchshift * const object = (t_pitchshift*const)object_alloc((t_class*const)class);
 	if (object) {
         // default
         *(double*__nonnull const)object->ratio = *(long*__nonnull const)&object->count = 1;
-        *(long*__nonnull const)&object->frame = 4096; // default
+        *(long*__nonnull const)&object->frame = 4096;
 		attr_args_process(object, argc, argv);
         double ratio = 1;
         for ( intptr_t k = 0, K = object->count ; k < K ; ++ k )
@@ -129,6 +111,7 @@ C74_HIDDEN void routine64(t_pitchshift      *const this, t_object const*const ds
                     }
                     vDSP_vmulD(w.realp, 1, x, 1, x, 1, frame);
                 }
+                
                 { // dst
                     register double * __nonnull const o = this->o + s * period;
                     register double * __nonnull const x = this->x + ( count * 1 + s ) * frame;
