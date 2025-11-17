@@ -13,6 +13,19 @@
         "boxes": [
             {
                 "box": {
+                    "bgcolor": [ 0.2627450980392157, 0.33725490196078434, 0.38823529411764707, 1.0 ],
+                    "color": [ 0.6392156862745098, 0.6901960784313725, 0.5294117647058824, 1.0 ],
+                    "id": "obj-7",
+                    "maxclass": "newobj",
+                    "numinlets": 2,
+                    "numoutlets": 2,
+                    "outlettype": [ "jit_matrix", "" ],
+                    "patching_rect": [ 375.0, 780.0, 75.0, 22.0 ],
+                    "text": "jit.* @val 0"
+                }
+            },
+            {
+                "box": {
                     "id": "obj-14",
                     "maxclass": "comment",
                     "numinlets": 1,
@@ -74,7 +87,7 @@
                             "modernui": 1
                         },
                         "classnamespace": "box",
-                        "rect": [ 34.0, 93.0, 1852.0, 863.0 ],
+                        "rect": [ 34.0, 62.0, 1852.0, 984.0 ],
                         "boxes": [
                             {
                                 "box": {
@@ -551,7 +564,7 @@
                                     "maxclass": "inlet",
                                     "numinlets": 0,
                                     "numoutlets": 1,
-                                    "outlettype": [ "" ],
+                                    "outlettype": [ "jit_matrix" ],
                                     "patching_rect": [ 15.0, 15.0, 30.0, 30.0 ],
                                     "tricolor": [ 0.6392156862745098, 0.6901960784313725, 0.5294117647058824, 1.0 ]
                                 }
@@ -2222,7 +2235,7 @@
             },
             {
                 "patchline": {
-                    "destination": [ "obj-11", 0 ],
+                    "destination": [ "obj-7", 0 ],
                     "source": [ "obj-12", 0 ]
                 }
             },
@@ -2403,14 +2416,14 @@
             {
                 "patchline": {
                     "destination": [ "obj-2", 1 ],
-                    "order": 1,
+                    "order": 2,
                     "source": [ "obj-4", 0 ]
                 }
             },
             {
                 "patchline": {
                     "destination": [ "obj-47", 1 ],
-                    "order": 2,
+                    "order": 3,
                     "source": [ "obj-4", 0 ]
                 }
             },
@@ -2423,8 +2436,15 @@
             },
             {
                 "patchline": {
+                    "destination": [ "obj-7", 1 ],
+                    "order": 1,
+                    "source": [ "obj-4", 0 ]
+                }
+            },
+            {
+                "patchline": {
                     "destination": [ "obj-77", 0 ],
-                    "order": 3,
+                    "order": 4,
                     "source": [ "obj-4", 0 ]
                 }
             },
@@ -2533,6 +2553,12 @@
                 "patchline": {
                     "destination": [ "obj-67", 0 ],
                     "source": [ "obj-69", 0 ]
+                }
+            },
+            {
+                "patchline": {
+                    "destination": [ "obj-11", 0 ],
+                    "source": [ "obj-7", 0 ]
                 }
             },
             {
@@ -2649,14 +2675,6 @@
         "parameters": {
             "obj-54": [ "live.button", "live.button", 0 ],
             "obj-80": [ "live.gain~", "live.gain~", 0 ],
-            "parameterbanks": {
-                "0": {
-                    "index": 0,
-                    "name": "",
-                    "parameters": [ "-", "-", "-", "-", "-", "-", "-", "-" ],
-                    "buttons": [ "-", "-", "-", "-", "-", "-", "-", "-" ]
-                }
-            },
             "inherited_shortname": 1
         },
         "autosave": 0
