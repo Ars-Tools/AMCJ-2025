@@ -15,11 +15,12 @@
                 "box": {
                     "comment": "",
                     "id": "obj-17",
-                    "index": 0,
+                    "index": 1,
                     "maxclass": "outlet",
                     "numinlets": 1,
                     "numoutlets": 0,
-                    "patching_rect": [ 15.0, 270.0, 30.0, 30.0 ]
+                    "patching_rect": [ 15.0, 270.0, 30.0, 30.0 ],
+                    "tricolor": [ 0.6392156862745098, 0.6901960784313725, 0.5294117647058824, 1.0 ]
                 }
             },
             {
@@ -130,12 +131,13 @@
                 "box": {
                     "comment": "",
                     "id": "obj-1",
-                    "index": 0,
+                    "index": 1,
                     "maxclass": "inlet",
                     "numinlets": 0,
                     "numoutlets": 1,
                     "outlettype": [ "" ],
-                    "patching_rect": [ 15.0, 0.0, 30.0, 30.0 ]
+                    "patching_rect": [ 15.0, 0.0, 30.0, 30.0 ],
+                    "tricolor": [ 0.6392156862745098, 0.6901960784313725, 0.5294117647058824, 1.0 ]
                 }
             }
         ],
@@ -214,7 +216,6 @@
                     "source": [ "obj-8", 0 ]
                 }
             }
-        ],
-        "autosave": 0
+        ]
     }
 }
