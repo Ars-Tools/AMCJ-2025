@@ -87,14 +87,6 @@ C74_HIDDEN void routine64(t_pitchshift      *const this, t_object const*const ds
             register intptr_t const base = this->cursor % period;
             register intptr_t const head = MIN(frame, period - base);
             register intptr_t const tail = MAX(0, base + frame - period);
-            DSPDoubleSplitComplex const z = {
-                .realp=this->z + 0 * frame,
-                .imagp=this->z + 2 * frame
-            };
-            DSPDoubleSplitComplex const w = {
-                .realp=this->w + 0 * frame,
-                .imagp=this->w + 1 * frame
-            };
             // fetch
             for ( register intptr_t s = 0, S = count ; s < S ; ++ s ) {
                 { // src
@@ -109,14 +101,14 @@ C74_HIDDEN void routine64(t_pitchshift      *const this, t_object const*const ds
                         x[t] = simd_mix(i[q.x], i[q.y], m);
 //                        x[t] = i[((intptr_t const)fma(t, factor, this->cursor))%period];
                     }
-                    vDSP_vmulD(w.realp, 1, x, 1, x, 1, frame);
+                    vDSP_vmulD(this->w, 1, x, 1, x, 1, frame);
                 }
                 
                 { // dst
                     register double * __nonnull const o = this->o + s * period;
                     register double * __nonnull const x = this->x + ( count * 1 + s ) * frame;
-                    vDSP_vmulD(w.realp, 1, o + base, 1, x, 1, head);
-                    vDSP_vmulD(w.realp + head, 1, o, 1, x + head, 1, tail);
+                    vDSP_vmulD(this->w, 1, o + base, 1, x, 1, head);
+                    vDSP_vmulD(this->w + head, 1, o, 1, x + head, 1, tail);
                 }
             }
             vDSP_vclrD(this->y, 1, 2 * count * frame);
@@ -124,7 +116,10 @@ C74_HIDDEN void routine64(t_pitchshift      *const this, t_object const*const ds
             vDSP_fftm_ziptD(this->setup, &(DSPDoubleSplitComplex const) {
                 .realp=this->x,
                 .imagp=this->y
-            }, 1, frame, &z, this->log2n, 2 * count, kFFTDirection_Forward);
+            }, 1, frame, &(DSPDoubleSplitComplex const) {
+                .realp=this->z + 0 * frame,
+                .imagp=this->z + 2 * frame
+            }, this->log2n, 2 * count, kFFTDirection_Forward);
             // merge
             vDSP_zvabsD(&(DSPDoubleSplitComplex const) {
                 .realp=this->x,
@@ -142,7 +137,10 @@ C74_HIDDEN void routine64(t_pitchshift      *const this, t_object const*const ds
             vDSP_fftm_ziptD(this->setup, &(DSPDoubleSplitComplex const) {
                 .realp=this->x,
                 .imagp=this->y
-            }, 1, frame, &z, this->log2n, 1 * count, kFFTDirection_Inverse);
+            }, 1, frame, &(DSPDoubleSplitComplex const) {
+                .realp=this->z + 0 * frame,
+                .imagp=this->z + 2 * frame
+            }, this->log2n, 1 * count, kFFTDirection_Inverse);
             vDSP_vsdivD(this->x, 1, (double const[]){2.0 * frame}, this->x, 1, count * frame);
             // fetch
             for ( register intptr_t s = 0, S = count ; s < S ; ++ s ) {
@@ -158,8 +156,8 @@ C74_HIDDEN void routine64(t_pitchshift      *const this, t_object const*const ds
 //                           o, 1,
 //                           o, 1,
 //                           tail);
-                vDSP_vmaD(w.realp, 1, x, 1, o + base, 1, o + base, 1, head);
-                vDSP_vmaD(w.realp + head, 1, x + head, 1, o, 1, o, 1, tail);
+                vDSP_vmaD(this->w, 1, x, 1, o + base, 1, o + base, 1, head);
+                vDSP_vmaD(this->w + head, 1, x + head, 1, o, 1, o, 1, tail);
             }
         }
     }
@@ -202,7 +200,7 @@ C74_HIDDEN void dsp64(t_pitchshift*const this, t_object const*const dsp64, short
 C74_EXPORT void ext_main(void*const _) {
 	if ( !class ) {
 		//
-		t_class * const object = (t_class*const)class_new("pcshift~", (method const)new, (method const)del, sizeof(t_pitchshift const), 0L, A_GIMME, 0);
+		t_class * const object = (t_class*const)class_new("pcv.pitchshift~", (method const)new, (method const)del, sizeof(t_pitchshift const), 0L, A_GIMME, 0);
 		
 		// DSP relations
 		class_addmethod(object, (method const)dsp64, "dsp64", A_CANT, 0);
