@@ -1,0 +1,118 @@
+<svg viewBox="0 0 800 450" xmlns="http://www.w3.org/2000/svg" style="font-family: 'Noto Sans JP', sans-serif;">
+    <!-- Definitions -->
+    <defs>
+        <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+            <polygon points="0 0, 10 3.5, 0 7" fill="#64748b" />
+        </marker>
+        <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+            <feGaussianBlur stdDeviation="2" result="blur" />
+            <feComposite in="SourceGraphic" in2="blur" operator="over" />
+        </filter>
+    </defs>
+
+    <!-- Background Grid -->
+    <pattern id="smallGrid" width="20" height="20" patternUnits="userSpaceOnUse">
+        <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#1e293b" stroke-width="1"/>
+    </pattern>
+    <rect width="100%" height="100%" fill="url(#smallGrid)" rx="8" />
+
+    <!-- Title -->
+    <!--text x="40" y="40" fill="#f1f5f9" font-size="18" font-weight="bold">Phase Transient &amp; Coherence</text-->
+    <!--text x="40" y="65" fill="#94a3b8" font-size="12">Impact of Phase Alignment on Transient Sharpness</text-->
+
+    <!-- ========================================== -->
+    <!-- LEFT SIDE: Phase Locked (Good Transient) -->
+    <!-- ========================================== -->
+    <g transform="translate(40, 100)">
+        <text x="0" y="-10" fill="#38bdf8" font-size="14" font-weight="bold">Phase Locked (Sharp)</text>
+        <text x="0" y="5" fill="#94a3b8" font-size="10">All frequencies align at transient time</text>
+
+        <!-- Container -->
+        <rect x="0" y="20" width="340" height="280" rx="6" fill="#1e293b" stroke="#38bdf8" stroke-width="1"/>
+
+        <!-- 1. Component Waves (Bottom) -->
+        <g transform="translate(20, 180)">
+            <text x="0" y="-10" fill="#64748b" font-size="10">Component Waves (Harmonics)</text>
+            <!-- Axis -->
+            <line x1="0" y1="40" x2="300" y2="40" stroke="#334155" stroke-width="1"/>
+            <!-- Alignment Line -->
+            <line x1="150" y1="0" x2="150" y2="80" stroke="#f1f5f9" stroke-width="1" stroke-dasharray="2,2" opacity="0.5"/>
+            
+            <!-- Wave 1 (Low) -->
+            <path d="M 0 40 C 50 40, 100 0, 150 0 C 200 0, 250 40, 300 40" fill="none" stroke="#38bdf8" stroke-width="1" opacity="0.6"/>
+            <!-- Wave 2 (Mid) -->
+            <path d="M 0 40 C 30 40, 120 0, 150 0 C 180 0, 270 40, 300 40" fill="none" stroke="#38bdf8" stroke-width="1" opacity="0.6"/>
+            <!-- Wave 3 (High) -->
+            <path d="M 0 40 C 20 40, 130 0, 150 0 C 170 0, 280 40, 300 40" fill="none" stroke="#38bdf8" stroke-width="1" opacity="0.6"/>
+        </g>
+
+        <!-- 2. Summed Wave (Top) -->
+        <g transform="translate(20, 60)">
+            <text x="0" y="-10" fill="#f1f5f9" font-size="12">Summed Signal (Output)</text>
+            <!-- Axis -->
+            <line x1="0" y1="50" x2="300" y2="50" stroke="#475569" stroke-width="1"/>
+            
+            <!-- Sharp Pulse (Sum of aligned waves) -->
+            <path d="M 0 50 L 130 50 Q 140 50, 150 10 Q 160 50, 170 50 L 300 50" fill="none" stroke="#38bdf8" stroke-width="3" filter="url(#glow)"/>
+            
+            <!-- Arrow indicating sharpness -->
+            <text x="180" y="20" fill="#38bdf8" font-size="10">Sharp Attack</text>
+        </g>
+    </g>
+
+
+    <!-- ========================================== -->
+    <!-- RIGHT SIDE: Phase Scrambled (Smearing) -->
+    <!-- ========================================== -->
+    <g transform="translate(420, 100)">
+        <text x="0" y="-10" fill="#f59e0b" font-size="14" font-weight="bold">Phase Scrambled (Smeared)</text>
+        <text x="0" y="5" fill="#94a3b8" font-size="10">Random phase shifts disperse energy</text>
+
+        <!-- Container -->
+        <rect x="0" y="20" width="340" height="280" rx="6" fill="#1e293b" stroke="#f59e0b" stroke-width="1"/>
+
+        <!-- 1. Component Waves (Bottom) -->
+        <g transform="translate(20, 180)">
+            <text x="0" y="-10" fill="#64748b" font-size="10">Component Waves (Shifted)</text>
+            <!-- Axis -->
+            <line x1="0" y1="40" x2="300" y2="40" stroke="#334155" stroke-width="1"/>
+            <!-- Reference Line (shows misalignment) -->
+            <line x1="150" y1="0" x2="150" y2="80" stroke="#f1f5f9" stroke-width="1" stroke-dasharray="2,2" opacity="0.3"/>
+
+            <!-- Wave 1 (Shifted Left) -->
+            <path d="M 0 40 C 30 40, 80 0, 130 0 C 180 0, 230 40, 300 40" fill="none" stroke="#f59e0b" stroke-width="1" opacity="0.6"/>
+            <!-- Wave 2 (Shifted Right) -->
+            <path d="M 0 40 C 50 40, 140 0, 170 0 C 200 0, 290 40, 300 40" fill="none" stroke="#f59e0b" stroke-width="1" opacity="0.6"/>
+            <!-- Wave 3 (Inverted/Shifted) -->
+            <path d="M 0 40 C 10 40, 100 80, 120 80 C 140 80, 250 40, 300 40" fill="none" stroke="#f59e0b" stroke-width="1" opacity="0.6"/>
+        </g>
+
+        <!-- 2. Summed Wave (Top) -->
+        <g transform="translate(20, 60)">
+            <text x="0" y="-10" fill="#f1f5f9" font-size="12">Summed Signal (Output)</text>
+            <!-- Axis -->
+            <line x1="0" y1="50" x2="300" y2="50" stroke="#475569" stroke-width="1"/>
+            
+            <!-- Smeared Pulse (Sum of misaligned waves) -->
+            <!-- Using a noisy, wider path to represent smearing -->
+            <path d="M 0 50 L 100 50 
+                     Q 110 40, 120 60 T 140 40 T 160 60 T 180 40 T 200 50 
+                     L 300 50" fill="none" stroke="#f59e0b" stroke-width="2"/>
+            
+            <!-- Label -->
+            <text x="180" y="20" fill="#f59e0b" font-size="10">Transient Smearing</text>
+            <text x="110" y="80" fill="#f59e0b" font-size="10" opacity="0.8">Pre-echo / Post-echo</text>
+        </g>
+    </g>
+
+    <!-- ========================================== -->
+    <!-- BOTTOM ANNOTATION -->
+    <!-- ========================================== -->
+    <g transform="translate(40, 410)">
+        <rect x="0" y="0" width="720" height="30" rx="4" fill="#0f172a" stroke="#334155" stroke-width="1"/>
+        <text x="360" y="20" fill="#94a3b8" font-size="12" text-anchor="middle">
+            <tspan font-weight="bold" fill="#38bdf8">Vertical Phase Coherence</tspan> is crucial for preserving percussive sounds (transients).
+        </text>
+    </g>
+
+</svg>

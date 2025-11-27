@@ -1,0 +1,120 @@
+<svg viewBox="0 0 800 450" xmlns="http://www.w3.org/2000/svg" style="font-family: 'Noto Sans JP', sans-serif;">
+    <!-- Definitions -->
+    <defs>
+        <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+            <polygon points="0 0, 10 3.5, 0 7" fill="#64748b" />
+        </marker>
+        <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+            <feGaussianBlur stdDeviation="2" result="blur" />
+            <feComposite in="SourceGraphic" in2="blur" operator="over" />
+        </filter>
+    </defs>
+
+    <!-- Background Grid -->
+    <pattern id="smallGrid" width="20" height="20" patternUnits="userSpaceOnUse">
+        <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#1e293b" stroke-width="1"/>
+    </pattern>
+    <rect width="100%" height="100%" fill="url(#smallGrid)" rx="8" />
+
+    <!-- Title -->
+    <!--text x="50" y="40" fill="#f1f5f9" font-size="18" font-weight="bold">Time Stretch Concept</text-->
+    <!--text x="50" y="65" fill="#94a3b8" font-size="12">Extending duration while preserving pitch (frequency)</text-->
+
+
+    <!-- ========================================== -->
+    <!-- INPUT SIGNAL (Original) -->
+    <!-- ========================================== -->
+    <g transform="translate(50, 100)">
+        <text x="0" y="-10" fill="#f59e0b" font-size="14" font-weight="bold">Input Signal</text>
+        
+        <!-- Axis -->
+        <line x1="0" y1="50" x2="200" y2="50" stroke="#475569" stroke-width="1"/>
+        
+        <!-- Waveform: Short Duration, High Frequency -->
+        <!-- Just a visual representation of a wave packet -->
+        <path d="M 0 50 
+                 Q 10 10, 20 50 T 40 50 T 60 50 T 80 50 T 100 50 T 120 50 T 140 50" 
+              fill="none" stroke="#f59e0b" stroke-width="2"/>
+        
+        <!-- Duration Marker -->
+        <line x1="0" y1="90" x2="140" y2="90" stroke="#f1f5f9" stroke-width="1"/>
+        <line x1="0" y1="85" x2="0" y2="95" stroke="#f1f5f9" stroke-width="1"/>
+        <line x1="140" y1="85" x2="140" y2="95" stroke="#f1f5f9" stroke-width="1"/>
+        <text x="70" y="110" fill="#f1f5f9" font-size="12" text-anchor="middle">Original Time (T)</text>
+    </g>
+
+
+    <!-- ========================================== -->
+    <!-- TRANSFORMATION ARROW -->
+    <!-- ========================================== -->
+    <g transform="translate(280, 150)">
+        <path d="M 0 0 L 60 0" stroke="#64748b" stroke-width="4" marker-end="url(#arrowhead)"/>
+        <text x="30" y="-15" fill="#38bdf8" font-size="12" text-anchor="middle" font-weight="bold">Time Stretch</text>
+    </g>
+
+
+    <!-- ========================================== -->
+    <!-- OUTPUT SIGNAL (Stretched) -->
+    <!-- ========================================== -->
+    <g transform="translate(380, 100)">
+        <text x="0" y="-10" fill="#38bdf8" font-size="14" font-weight="bold">Output Signal</text>
+        
+        <!-- Axis -->
+        <line x1="0" y1="50" x2="350" y2="50" stroke="#475569" stroke-width="1"/>
+        
+        <!-- Waveform: Long Duration, SAME Frequency -->
+        <!-- Crucial: The distance between peaks (wavelength) must look the SAME as input -->
+        <path d="M 0 50 
+                 Q 10 10, 20 50 T 40 50 T 60 50 T 80 50 T 100 50 T 120 50 T 140 50 T 160 50 T 180 50 T 200 50 T 220 50 T 240 50 T 260 50 T 280 50" 
+              fill="none" stroke="#38bdf8" stroke-width="2"/>
+        
+        <!-- Duration Marker -->
+        <line x1="0" y1="90" x2="280" y2="90" stroke="#f1f5f9" stroke-width="1"/>
+        <line x1="0" y1="85" x2="0" y2="95" stroke="#f1f5f9" stroke-width="1"/>
+        <line x1="280" y1="85" x2="280" y2="95" stroke="#f1f5f9" stroke-width="1"/>
+        <text x="140" y="110" fill="#f1f5f9" font-size="12" text-anchor="middle">Stretched Time (αT)</text>
+    </g>
+
+
+    <!-- ========================================== -->
+    <!-- COMPARISON / ZOOM (Proof of unchanged pitch) -->
+    <!-- ========================================== -->
+    
+    <!-- Input Zoom -->
+    <g transform="translate(50, 280)">
+        <circle cx="40" cy="40" r="40" fill="#1e293b" stroke="#f59e0b" stroke-width="2" stroke-dasharray="4 2"/>
+        <!-- Zoomed Wave Segment -->
+        <path d="M 10 40 Q 25 0, 40 40 T 70 40" fill="none" stroke="#f59e0b" stroke-width="3"/>
+        <text x="40" y="100" fill="#f59e0b" font-size="12" text-anchor="middle">Input Pitch</text>
+        
+        <!-- Wavelength Indicator -->
+        <line x1="10" y1="20" x2="70" y2="20" stroke="#94a3b8" stroke-width="1"/>
+        <text x="40" y="15" fill="#94a3b8" font-size="10" text-anchor="middle">λ</text>
+    </g>
+
+    <text x="180" y="325" fill="#f1f5f9" font-size="24" font-weight="bold" text-anchor="middle">=</text>
+    <text x="180" y="350" fill="#94a3b8" font-size="10" text-anchor="middle">Frequency Conserved</text>
+
+    <!-- Output Zoom -->
+    <g transform="translate(250, 280)">
+        <circle cx="40" cy="40" r="40" fill="#1e293b" stroke="#38bdf8" stroke-width="2" stroke-dasharray="4 2"/>
+        <!-- Zoomed Wave Segment (Identical to Input) -->
+        <path d="M 10 40 Q 25 0, 40 40 T 70 40" fill="none" stroke="#38bdf8" stroke-width="3"/>
+        <text x="40" y="100" fill="#38bdf8" font-size="12" text-anchor="middle">Output Pitch</text>
+        
+        <!-- Wavelength Indicator -->
+        <line x1="10" y1="20" x2="70" y2="20" stroke="#94a3b8" stroke-width="1"/>
+        <text x="40" y="15" fill="#94a3b8" font-size="10" text-anchor="middle">λ</text>
+    </g>
+
+    <!-- Description Box -->
+    <g transform="translate(450, 260)">
+        <rect x="0" y="0" width="280" height="100" rx="8" fill="#334155" stroke="#475569" stroke-width="1"/>
+        <text x="20" y="30" fill="#f1f5f9" font-size="14" font-weight="bold">Key Point</text>
+        <path d="M 20 50 L 260 50" stroke="#475569" stroke-width="1"/>
+        <text x="20" y="70" fill="#94a3b8" font-size="12">Waveform is elongated in time,</text>
+        <text x="20" y="90" fill="#f59e0b" font-size="12" font-weight="bold">BUT</text>
+        <text x="55" y="90" fill="#94a3b8" font-size="12">the oscillation speed (pitch) stays the same.</text>
+    </g>
+
+</svg>
