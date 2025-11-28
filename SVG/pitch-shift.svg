@@ -1,0 +1,147 @@
+<svg viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg" style="font-family: 'Noto Sans JP', sans-serif;">
+    <!-- Definitions -->
+    <defs>
+        <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+            <polygon points="0 0, 10 3.5, 0 7" fill="#64748b" />
+        </marker>
+        <marker id="arrowhead-orange" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+            <polygon points="0 0, 10 3.5, 0 7" fill="#f59e0b" />
+        </marker>
+        <marker id="arrowhead-green" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+            <polygon points="0 0, 10 3.5, 0 7" fill="#22c55e" />
+        </marker>
+        <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+            <feGaussianBlur stdDeviation="2" result="blur" />
+            <feComposite in="SourceGraphic" in2="blur" operator="over" />
+        </filter>
+        <pattern id="smallGrid" width="20" height="20" patternUnits="userSpaceOnUse">
+            <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#1e293b" stroke-width="1"/>
+        </pattern>
+    </defs>
+
+    <!-- Background -->
+    <rect width="100%" height="100%" fill="url(#smallGrid)" rx="8" />
+
+    <!-- Title -->
+    <!--text x="40" y="40" fill="#f1f5f9" font-size="24" font-weight="bold">Pitch Shifting Mechanism</text-->
+    <!--text x="40" y="70" fill="#94a3b8" font-size="14">How to change pitch without changing duration using Resampling + Time Stretch.</text-->
+
+
+    <!-- ============================================================================================== -->
+    <!-- STEP 1: ORIGINAL SIGNAL -->
+    <!-- ============================================================================================== -->
+    <g transform="translate(40, 100)">
+        <text x="0" y="-10" fill="#38bdf8" font-size="16" font-weight="bold">1. Original Signal</text>
+        
+        <!-- Timeline Axis -->
+        <line x1="0" y1="50" x2="200" y2="50" stroke="#475569" stroke-width="1"/>
+        
+        <!-- Waveform: Normal Frequency (4 cycles) -->
+        <path d="M 0 50 Q 12.5 0, 25 50 T 50 50 T 75 50 T 100 50 T 125 50 T 150 50 T 175 50 T 200 50" 
+              fill="none" stroke="#38bdf8" stroke-width="2"/>
+        
+        <!-- Markers -->
+        <text x="100" y="80" fill="#f1f5f9" font-size="12" text-anchor="middle">Time: T</text>
+        <text x="100" y="95" fill="#38bdf8" font-size="12" font-weight="bold" text-anchor="middle">Pitch: F</text>
+    </g>
+
+    <!-- Arrow 1: Resampling -->
+    <g transform="translate(260, 150)">
+        <path d="M 0 0 L 60 0" stroke="#64748b" stroke-width="3" marker-end="url(#arrowhead)"/>
+        <text x="30" y="-15" fill="#f59e0b" font-size="12" font-weight="bold" text-anchor="middle">Step A: Resampling</text>
+        <text x="30" y="20" fill="#94a3b8" font-size="10" text-anchor="middle">(Play Faster / 2x Speed)</text>
+    </g>
+
+
+    <!-- ============================================================================================== -->
+    <!-- STEP 2: RESAMPLED (INTERMEDIATE) -->
+    <!-- ============================================================================================== -->
+    <g transform="translate(350, 100)">
+        <text x="0" y="-10" fill="#f59e0b" font-size="16" font-weight="bold">2. Speed Changed</text>
+        
+        <!-- Timeline Axis (Shortened) -->
+        <line x1="0" y1="50" x2="100" y2="50" stroke="#475569" stroke-width="1"/>
+        <line x1="100" y1="50" x2="200" y2="50" stroke="#475569" stroke-width="1" stroke-dasharray="2 2" opacity="0.3"/>
+        
+        <!-- Waveform: Compressed (Higher Pitch) -->
+        <!-- 4 cycles compressed into 100px -->
+        <path d="M 0 50 Q 6.25 0, 12.5 50 T 25 50 T 37.5 50 T 50 50 T 62.5 50 T 75 50 T 87.5 50 T 100 50" 
+              fill="none" stroke="#f59e0b" stroke-width="2"/>
+        
+        <!-- Markers -->
+        <text x="50" y="80" fill="#f1f5f9" font-size="12" text-anchor="middle">Time: 0.5 T</text>
+        <text x="50" y="95" fill="#f59e0b" font-size="12" font-weight="bold" text-anchor="middle">Pitch: 2F (High)</text>
+        
+        <!-- Annotation -->
+        <text x="220" y="50" fill="#ef4444" font-size="12" font-style="italic">Side Effect: Duration is halved</text>
+        <text x="220" y="65" fill="#ef4444" font-size="10" font-style="italic">(Need to restore length)</text>
+    </g>
+
+    <!-- Arrow 2: Time Stretch -->
+    <g transform="translate(400, 220)">
+        <path d="M 0 0 L 0 50" stroke="#64748b" stroke-width="3" marker-end="url(#arrowhead)"/>
+        <text x="10" y="25" fill="#22c55e" font-size="12" font-weight="bold" text-anchor="start">Step B: Time Stretch</text>
+        <text x="10" y="40" fill="#94a3b8" font-size="10" text-anchor="start">(Stretch 200% via OLA/PV)</text>
+    </g>
+
+
+    <!-- ============================================================================================== -->
+    <!-- STEP 3: FINAL OUTPUT (PITCH SHIFTED) -->
+    <!-- ============================================================================================== -->
+    <g transform="translate(350, 320)">
+        <text x="0" y="-10" fill="#22c55e" font-size="16" font-weight="bold">3. Final Output (Pitch Shifted)</text>
+        
+        <!-- Timeline Axis (Restored) -->
+        <line x1="0" y1="50" x2="200" y2="50" stroke="#475569" stroke-width="1"/>
+        
+        <!-- Waveform: Stretched High Pitch -->
+        <!-- We take the "High Pitch" wave (wavelength 25px) and repeat/stretch it to fill 200px -->
+        <!-- 8 cycles in 200px -->
+        <path d="M 0 50 Q 6.25 0, 12.5 50 T 25 50 T 37.5 50 T 50 50 T 62.5 50 T 75 50 T 87.5 50 T 100 50 
+                 T 112.5 50 T 125 50 T 137.5 50 T 150 50 T 162.5 50 T 175 50 T 187.5 50 T 200 50" 
+              fill="none" stroke="#22c55e" stroke-width="2" filter="url(#glow)"/>
+        
+        <!-- Markers -->
+        <text x="100" y="80" fill="#f1f5f9" font-size="12" text-anchor="middle">Time: T (Restored)</text>
+        <text x="100" y="95" fill="#22c55e" font-size="12" font-weight="bold" text-anchor="middle">Pitch: 2F (High)</text>
+    </g>
+
+
+    <!-- ============================================================================================== -->
+    <!-- CONCEPTUAL DIAGRAM BOX -->
+    <!-- ============================================================================================== -->
+    <g transform="translate(40, 480)">
+        <rect x="0" y="0" width="720" height="100" rx="8" fill="#0f172a" stroke="#334155" stroke-width="1"/>
+        
+        <text x="20" y="30" fill="#f1f5f9" font-size="14" font-weight="bold">Summary: The 2-Step Process</text>
+        
+        <!-- Equation-like flow -->
+        <g transform="translate(40, 60)">
+            <text x="0" y="0" fill="#38bdf8" font-size="12" font-weight="bold">Original</text>
+            <text x="0" y="15" fill="#94a3b8" font-size="10">Length: L</text>
+            <text x="0" y="25" fill="#94a3b8" font-size="10">Pitch: P</text>
+            
+            <text x="80" y="10" fill="#f1f5f9" font-size="14">→</text>
+            <text x="70" y="-5" fill="#f59e0b" font-size="10" text-anchor="middle">Resample</text>
+
+            <text x="110" y="0" fill="#f59e0b" font-size="12" font-weight="bold">Intermediate</text>
+            <text x="110" y="15" fill="#94a3b8" font-size="10">Length: L / k</text>
+            <text x="110" y="25" fill="#f59e0b" font-size="10">Pitch: P × k</text>
+            
+            <text x="200" y="10" fill="#f1f5f9" font-size="14">→</text>
+            <text x="190" y="-5" fill="#22c55e" font-size="10" text-anchor="middle">Stretch</text>
+
+            <text x="230" y="0" fill="#22c55e" font-size="12" font-weight="bold">Result</text>
+            <text x="230" y="15" fill="#f1f5f9" font-size="10">Length: L (Fixed!)</text>
+            <text x="230" y="25" fill="#22c55e" font-size="10">Pitch: P × k</text>
+        </g>
+
+        <!-- Visual Metaphor -->
+        <g transform="translate(450, 45)">
+            <text x="0" y="0" fill="#94a3b8" font-size="12">Analogy:</text>
+            <text x="60" y="0" fill="#f1f5f9" font-size="12">Playing a tape faster (Chipmunk voice)</text>
+            <text x="60" y="20" fill="#f1f5f9" font-size="12">+ Copy-pasting segments to fill the silence.</text>
+        </g>
+    </g>
+
+</svg>

@@ -1,0 +1,194 @@
+<svg viewBox="0 0 800 750" xmlns="http://www.w3.org/2000/svg" style="font-family: 'Noto Sans JP', sans-serif;">
+    <!-- Definitions -->
+    <defs>
+        <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+            <polygon points="0 0, 10 3.5, 0 7" fill="#64748b" />
+        </marker>
+        <marker id="arrowhead-orange" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+            <polygon points="0 0, 10 3.5, 0 7" fill="#f59e0b" />
+        </marker>
+        <marker id="arrowhead-green" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+            <polygon points="0 0, 10 3.5, 0 7" fill="#22c55e" />
+        </marker>
+        <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+            <feGaussianBlur stdDeviation="2" result="blur" />
+            <feComposite in="SourceGraphic" in2="blur" operator="over" />
+        </filter>
+        <!-- Window Shape -->
+        <path id="windowPath" d="M 0 30 Q 20 0, 40 30" fill="none" stroke-width="2"/>
+    </defs>
+
+    <!-- Background -->
+    <pattern id="smallGrid" width="20" height="20" patternUnits="userSpaceOnUse">
+        <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#1e293b" stroke-width="1"/>
+    </pattern>
+    <rect width="100%" height="100%" fill="url(#smallGrid)" rx="8" />
+
+    <!-- Main Title -->
+    <!--text x="40" y="40" fill="#f1f5f9" font-size="24" font-weight="bold">Applications of Discontinuous Analysis</text-->
+    <!--text x="40" y="70" fill="#94a3b8" font-size="14">Smooth synthesis from skipped or random input frames using Phase Feedback.</text-->
+
+    <!-- ============================================================================================== -->
+    <!-- PATTERN 1: TIME SKIP / DIGEST -->
+    <!-- ============================================================================================== -->
+    <g transform="translate(0, 100)">
+        <!-- Section Label -->
+        <rect x="20" y="0" width="760" height="280" rx="8" fill="#1e293b" stroke="#334155" stroke-width="1" opacity="0.5"/>
+        <text x="40" y="30" fill="#38bdf8" font-size="16" font-weight="bold">Pattern 1: Time Skip / Digest Playback</text>
+        <text x="40" y="50" fill="#94a3b8" font-size="12">Skipping large sections (e.g., silence removal) while maintaining continuity.</text>
+
+        <!-- Input Waveform -->
+        <g transform="translate(40, 80)">
+            <text x="0" y="-10" fill="#38bdf8" font-size="12">Input</text>
+            <line x1="0" y1="40" x2="700" y2="40" stroke="#475569" stroke-width="1"/>
+            
+            <!-- Waveform -->
+            <path d="M 0 40 Q 20 10, 40 40 T 80 40 T 120 40 T 160 40 T 200 40 T 240 40 T 280 40 
+                     T 320 40 T 360 40 T 400 40 T 440 40 T 480 40 T 520 40 T 560 40 T 600 40" 
+                  fill="none" stroke="#334155" stroke-width="1"/>
+            
+            <!-- Frame A -->
+            <g transform="translate(50, 10)">
+                <use href="#windowPath" stroke="#38bdf8"/>
+                <text x="20" y="-5" fill="#38bdf8" font-size="10" text-anchor="middle">Frame A</text>
+            </g>
+            <!-- Frame B (Far away) -->
+            <g transform="translate(450, 10)">
+                <use href="#windowPath" stroke="#38bdf8"/>
+                <text x="20" y="-5" fill="#38bdf8" font-size="10" text-anchor="middle">Frame B</text>
+            </g>
+            
+            <!-- Skip Arrow -->
+            <path d="M 100 40 Q 275 -20, 450 40" fill="none" stroke="#ef4444" stroke-width="1" stroke-dasharray="4 2" marker-end="url(#arrowhead)"/>
+            <text x="275" y="10" fill="#ef4444" font-size="10" text-anchor="middle">Large Skip</text>
+        </g>
+
+        <!-- Output Synthesis -->
+        <g transform="translate(40, 200)">
+            <text x="0" y="-10" fill="#22c55e" font-size="12">Output</text>
+            <line x1="0" y1="40" x2="300" y2="40" stroke="#475569" stroke-width="1"/>
+            
+            <!-- Out A -->
+            <g transform="translate(50, 10)">
+                <use href="#windowPath" stroke="#38bdf8" opacity="0.7"/>
+                <path d="M 0 30 Q 20 10, 40 30" fill="none" stroke="#38bdf8" stroke-width="2"/>
+                <text x="20" y="60" fill="#38bdf8" font-size="10" text-anchor="middle">Out A</text>
+            </g>
+            
+            <!-- Out B (Connected) -->
+            <g transform="translate(80, 10)">
+                <use href="#windowPath" stroke="#38bdf8" opacity="0.7"/>
+                <path d="M 0 30 Q 20 10, 40 30" fill="none" stroke="#38bdf8" stroke-width="2"/>
+                <text x="20" y="60" fill="#38bdf8" font-size="10" text-anchor="middle">Out B</text>
+            </g>
+
+            <!-- Phase Lock Icon -->
+            <circle cx="90" cy="40" r="15" fill="none" stroke="#f59e0b" stroke-width="2" stroke-dasharray="2 2"/>
+            <text x="130" y="35" fill="#f59e0b" font-size="10" font-weight="bold">Phase Locked</text>
+            <text x="130" y="48" fill="#94a3b8" font-size="10">to Out A's end</text>
+        </g>
+        
+        <!-- Processing Arrow -->
+        <path d="M 100 130 L 100 180" stroke="#64748b" stroke-width="1" marker-end="url(#arrowhead)"/>
+        <path d="M 500 130 L 500 160 L 150 160 L 150 180" stroke="#64748b" stroke-width="1" marker-end="url(#arrowhead)"/>
+    </g>
+
+
+    <!-- ============================================================================================== -->
+    <!-- PATTERN 2: GRANULAR / RANDOM ACCESS -->
+    <!-- ============================================================================================== -->
+    <g transform="translate(0, 400)">
+        <!-- Section Label -->
+        <rect x="20" y="0" width="760" height="280" rx="8" fill="#1e293b" stroke="#334155" stroke-width="1" opacity="0.5"/>
+        <text x="40" y="30" fill="#e879f9" font-size="16" font-weight="bold">Pattern 2: Granular Synthesis (Random Access)</text>
+        <text x="40" y="50" fill="#94a3b8" font-size="12">Creating textures by picking random frames. Typically creates clicks, but here it's smooth.</text>
+
+        <!-- Input Waveform -->
+        <g transform="translate(40, 80)">
+            <text x="0" y="-10" fill="#e879f9" font-size="12">Input</text>
+            <line x1="0" y1="40" x2="700" y2="40" stroke="#475569" stroke-width="1"/>
+            <path d="M 0 40 Q 20 10, 40 40 T 80 40 T 120 40 T 160 40 T 200 40 T 240 40 T 280 40 
+                     T 320 40 T 360 40 T 400 40 T 440 40 T 480 40 T 520 40 T 560 40 T 600 40" 
+                  fill="none" stroke="#334155" stroke-width="1"/>
+            
+            <!-- Random Frames -->
+            <!-- 1. Cyan -->
+            <g transform="translate(150, 10)">
+                <use href="#windowPath" stroke="#38bdf8"/>
+                <text x="20" y="-5" fill="#38bdf8" font-size="10" text-anchor="middle">1</text>
+            </g>
+            <!-- 2. Pink -->
+            <g transform="translate(500, 10)">
+                <use href="#windowPath" stroke="#e879f9"/>
+                <text x="20" y="-5" fill="#e879f9" font-size="10" text-anchor="middle">2</text>
+            </g>
+            <!-- 3. Orange -->
+            <g transform="translate(50, 10)">
+                <use href="#windowPath" stroke="#f59e0b"/>
+                <text x="20" y="-5" fill="#f59e0b" font-size="10" text-anchor="middle">3</text>
+            </g>
+            <!-- 4. Green -->
+            <g transform="translate(350, 10)">
+                <use href="#windowPath" stroke="#22c55e"/>
+                <text x="20" y="-5" fill="#22c55e" font-size="10" text-anchor="middle">4</text>
+            </g>
+
+            <text x="650" y="20" fill="#94a3b8" font-size="10">Random Picks</text>
+        </g>
+
+        <!-- Output Synthesis -->
+        <g transform="translate(40, 200)">
+            <text x="0" y="-10" fill="#22c55e" font-size="12">Output (Stream)</text>
+            <line x1="0" y1="40" x2="400" y2="40" stroke="#475569" stroke-width="1"/>
+            
+            <!-- Sequence: 1 -> 2 -> 3 -> 4 -->
+            <g transform="translate(50, 10)">
+                <use href="#windowPath" stroke="#38bdf8" opacity="0.8"/>
+                <path d="M 0 30 Q 20 10, 40 30" fill="none" stroke="#38bdf8" stroke-width="2"/>
+            </g>
+            <g transform="translate(80, 10)">
+                <use href="#windowPath" stroke="#e879f9" opacity="0.8"/>
+                <path d="M 0 30 Q 20 10, 40 30" fill="none" stroke="#e879f9" stroke-width="2"/>
+            </g>
+            <g transform="translate(110, 10)">
+                <use href="#windowPath" stroke="#f59e0b" opacity="0.8"/>
+                <path d="M 0 30 Q 20 10, 40 30" fill="none" stroke="#f59e0b" stroke-width="2"/>
+            </g>
+            <g transform="translate(140, 10)">
+                <use href="#windowPath" stroke="#22c55e" opacity="0.8"/>
+                <path d="M 0 30 Q 20 10, 40 30" fill="none" stroke="#22c55e" stroke-width="2"/>
+            </g>
+
+            <!-- Connecting overlay -->
+            <path d="M 50 40 L 180 40" stroke="#f1f5f9" stroke-width="2" stroke-dasharray="2 2" opacity="0.5"/>
+            <text x="220" y="45" fill="#f1f5f9" font-size="12">Smooth Continuous Texture</text>
+        </g>
+
+        <!-- Processing Arrows (Conceptual) -->
+        <!-- Just showing they gather -->
+        <path d="M 170 130 L 170 160 L 80 160 L 80 180" stroke="#64748b" stroke-width="1" stroke-dasharray="2 2" marker-end="url(#arrowhead)"/>
+        <path d="M 520 130 L 520 155 L 110 155 L 110 180" stroke="#64748b" stroke-width="1" stroke-dasharray="2 2" marker-end="url(#arrowhead)"/>
+        <path d="M 70 130 L 70 150 L 140 150 L 140 180" stroke="#64748b" stroke-width="1" stroke-dasharray="2 2" marker-end="url(#arrowhead)"/>
+    </g>
+
+
+    <!-- ============================================================================================== -->
+    <!-- COMMON MECHANISM (Right Side) -->
+    <!-- ============================================================================================== -->
+    <g transform="translate(550, 300)">
+        <rect x="0" y="0" width="220" height="150" rx="8" fill="#0f172a" stroke="#f59e0b" stroke-width="2"/>
+        <text x="110" y="25" fill="#f59e0b" font-size="14" font-weight="bold" text-anchor="middle">The Secret Sauce</text>
+        
+        <g transform="translate(20, 50)">
+            <text x="0" y="0" fill="#f1f5f9" font-size="11" font-weight="bold">Phase Feedback Loop</text>
+            <text x="0" y="20" fill="#94a3b8" font-size="10">Instead of using Input Phase,</text>
+            <text x="0" y="35" fill="#94a3b8" font-size="10">we calculate phase from</text>
+            <text x="0" y="50" fill="#22c55e" font-size="10" font-weight="bold">the Previous Output Frame.</text>
+            
+            <path d="M 0 70 L 180 70" stroke="#334155" stroke-width="1"/>
+            <text x="0" y="85" fill="#38bdf8" font-size="10">Input = Amplitude (Timbre)</text>
+            <text x="0" y="100" fill="#f59e0b" font-size="10">Output = Phase (Continuity)</text>
+        </g>
+    </g>
+
+</svg>
