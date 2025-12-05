@@ -1,10 +1,30 @@
-//#include<Foundation/Foundation.h>
 #include"ext.h"
 #include"ext_obex.h"
 #include"z_dsp.h"
 #include<simd/simd.h>
 #include<Accelerate/Accelerate.h>
 #define __MAX_ATTR_RATIO__ 128
+
+//
+// define data structure
+//
+// FFTSetupD: FFTm object
+// log2n: log2n depth for fft
+// frame: frame size to analyse and synthesis
+// queue: ring buffer position to append new packet
+// march: hop-size to progress process frame
+//
+// ratio: array of double for attribute to define pitch ratio to output
+// count: count of ratio for attribute
+//
+// x~w: temporary buffer to process framewise signal
+// i,o: ring buffer to synthesis
+//
+// period: ring buffer length
+// moment: elapse time (sample) from dsp start
+// cursor: processed index, frame-size-quantised length
+// 
+
 typedef struct {
 	t_pxobject const super;
     FFTSetupD __nonnull const setup;
