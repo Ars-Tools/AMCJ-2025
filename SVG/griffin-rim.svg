@@ -1,0 +1,147 @@
+<svg viewBox="0 0 800 550" xmlns="http://www.w3.org/2000/svg" style="font-family: 'Noto Sans JP', sans-serif;">
+    <!-- Definitions -->
+    <defs>
+        <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+            <polygon points="0 0, 10 3.5, 0 7" fill="#64748b" />
+        </marker>
+        <marker id="arrowhead-cyan" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+            <polygon points="0 0, 10 3.5, 0 7" fill="#38bdf8" />
+        </marker>
+        <marker id="arrowhead-orange" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+            <polygon points="0 0, 10 3.5, 0 7" fill="#f59e0b" />
+        </marker>
+        <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+            <feGaussianBlur stdDeviation="2" result="blur" />
+            <feComposite in="SourceGraphic" in2="blur" operator="over" />
+        </filter>
+        
+        <!-- Spectrogram Icon -->
+        <g id="specIcon">
+            <rect x="0" y="0" width="40" height="30" rx="2" fill="#1e293b" stroke-width="1"/>
+            <rect x="5" y="15" width="4" height="10" fill-opacity="0.8"/>
+            <rect x="11" y="5" width="4" height="20" fill-opacity="0.8"/>
+            <rect x="17" y="10" width="4" height="15" fill-opacity="0.8"/>
+            <rect x="23" y="20" width="4" height="5" fill-opacity="0.8"/>
+            <rect x="29" y="8" width="4" height="17" fill-opacity="0.8"/>
+        </g>
+    </defs>
+
+    <!-- Background -->
+    <pattern id="smallGrid" width="20" height="20" patternUnits="userSpaceOnUse">
+        <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#1e293b" stroke-width="1"/>
+    </pattern>
+    <rect width="100%" height="100%" fill="url(#smallGrid)" rx="8" />
+
+    <!-- Title -->
+    <!--text x="40" y="40" fill="#f1f5f9" font-size="24" font-weight="bold">Griffin-Lim Algorithm</text-->
+    <!--text x="40" y="70" fill="#94a3b8" font-size="14">Iterative Phase Reconstruction from Magnitude Spectrogram.</text-->
+
+
+    <!-- ============================================================================================== -->
+    <!-- INPUT: TARGET MAGNITUDE -->
+    <!-- ============================================================================================== -->
+    <g transform="translate(40, 150)">
+        <text x="0" y="-10" fill="#38bdf8" font-size="14" font-weight="bold">Input: Target Magnitude</text>
+        <rect x="0" y="0" width="140" height="100" rx="6" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
+        
+        <use href="#specIcon" x="20" y="20" transform="scale(2.5)" fill="#38bdf8"/>
+        <text x="70" y="55" fill="#f1f5f9" font-size="16" font-weight="bold" text-anchor="middle">|S|</text>
+        <text x="70" y="80" fill="#94a3b8" font-size="10" text-anchor="middle">(No Phase)</text>
+    </g>
+
+    <!-- Injection Arrow -->
+    <path d="M 180 200 L 260 200" stroke="#38bdf8" stroke-width="3" marker-end="url(#arrowhead-cyan)"/>
+    <text x="220" y="190" fill="#38bdf8" font-size="10" text-anchor="middle">Inject into Loop</text>
+
+
+    <!-- ============================================================================================== -->
+    <!-- THE ITERATIVE LOOP (Center) -->
+    <!-- ============================================================================================== -->
+    <g transform="translate(260, 100)">
+        <!-- Loop Container -->
+        <rect x="0" y="0" width="300" height="350" rx="12" fill="#0f172a" stroke="#334155" stroke-width="2" stroke-dasharray="8 4"/>
+        <text x="150" y="30" fill="#f1f5f9" font-size="14" font-weight="bold" text-anchor="middle">Iterative Loop</text>
+        <text x="150" y="330" fill="#94a3b8" font-size="12" text-anchor="middle">Repeat N times (e.g., 50-100)</text>
+
+        <!-- STEP 1: AMPLITUDE REPLACEMENT (Top Node) -->
+        <g transform="translate(50, 60)">
+            <rect x="0" y="0" width="200" height="60" rx="6" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
+            <text x="100" y="25" fill="#f1f5f9" font-size="12" font-weight="bold" text-anchor="middle">1. Magnitude Update</text>
+            
+            <!-- Formula -->
+            <text x="100" y="45" fill="#f1f5f9" font-size="12" text-anchor="middle">
+                X <tspan fill="#94a3b8">←</tspan> <tspan fill="#38bdf8">|S|</tspan> · <tspan fill="#f59e0b">e^(j∠X)</tspan>
+            </text>
+        </g>
+
+        <!-- Arrow Down Right -->
+        <path d="M 250 90 L 280 90 L 280 160 L 250 160" fill="none" stroke="#f1f5f9" stroke-width="2" marker-end="url(#arrowhead)"/>
+
+        <!-- STEP 2: ISTFT (Right Node) -->
+        <g transform="translate(170, 140)">
+            <rect x="0" y="0" width="100" height="50" rx="6" fill="#334155" stroke="#22c55e" stroke-width="2"/>
+            <text x="50" y="30" fill="#22c55e" font-size="14" font-weight="bold" text-anchor="middle">ISTFT</text>
+        </g>
+        
+        <!-- Signal x (Bottom Center) -->
+        <g transform="translate(110, 210)">
+            <text x="40" y="0" fill="#22c55e" font-size="12" font-weight="bold" text-anchor="middle">x[n]</text>
+            <path d="M 0 10 Q 20 -10, 40 10 T 80 10" fill="none" stroke="#22c55e" stroke-width="2"/>
+            <text x="40" y="25" fill="#94a3b8" font-size="9" text-anchor="middle">Time Domain</text>
+        </g>
+
+        <!-- Arrow Left Up -->
+        <path d="M 170 165 L 150 165 L 150 200 L 110 200" fill="none" stroke="#f1f5f9" stroke-width="2"/> 
+        <path d="M 30 200 L 10 200 L 10 170 L 30 170" fill="none" stroke="#f1f5f9" stroke-width="2" marker-end="url(#arrowhead)"/>
+
+        <!-- STEP 3: STFT (Left Node) -->
+        <g transform="translate(30, 140)">
+            <rect x="0" y="0" width="100" height="50" rx="6" fill="#334155" stroke="#f59e0b" stroke-width="2"/>
+            <text x="50" y="30" fill="#f59e0b" font-size="14" font-weight="bold" text-anchor="middle">STFT</text>
+        </g>
+
+        <!-- Arrow Up to Close Loop -->
+        <path d="M 80 140 L 80 110 L 110 110 L 110 120" fill="none" stroke="#f59e0b" stroke-width="2" marker-end="url(#arrowhead-orange)"/>
+        
+        <!-- Phase Extraction Visual -->
+        <text x="40" y="110" fill="#f59e0b" font-size="10">Extract Phase</text>
+        <text x="40" y="125" fill="#f59e0b" font-size="12" font-weight="bold">∠X</text>
+
+    </g>
+
+
+    <!-- ============================================================================================== -->
+    <!-- OUTPUT (Right) -->
+    <!-- ============================================================================================== -->
+    <g transform="translate(600, 250)">
+        <text x="0" y="-10" fill="#22c55e" font-size="14" font-weight="bold">Final Output</text>
+        
+        <!-- Waveform -->
+        <rect x="0" y="0" width="140" height="80" rx="6" fill="#1e293b" stroke="#22c55e" stroke-width="2"/>
+        <path d="M 10 40 Q 30 10, 50 40 T 90 40 T 130 40" fill="none" stroke="#22c55e" stroke-width="2" filter="url(#glow)"/>
+        <text x="70" y="65" fill="#f1f5f9" font-size="10" text-anchor="middle">Reconstructed</text>
+        <text x="70" y="75" fill="#f1f5f9" font-size="10" text-anchor="middle">Waveform</text>
+    </g>
+
+    <!-- Extraction Arrow -->
+    <path d="M 560 290 L 600 290" stroke="#22c55e" stroke-width="3" marker-end="url(#arrowhead-green)"/>
+
+
+    <!-- ============================================================================================== -->
+    <!-- EXPLANATION BOX (Bottom) -->
+    <!-- ============================================================================================== -->
+    <g transform="translate(40, 470)">
+        <rect x="0" y="0" width="720" height="60" rx="6" fill="#1e293b" stroke="#334155" stroke-width="1"/>
+        
+        <text x="20" y="25" fill="#38bdf8" font-size="12" font-weight="bold">Mechanism:</text>
+        <text x="100" y="25" fill="#f1f5f9" font-size="12">
+            1. Force Magnitude to match Target. 
+            2. Convert to Time (ISTFT) and back (STFT).
+            3. This round-trip forces the Phase to become consistent with the Magnitude.
+        </text>
+        <text x="100" y="45" fill="#94a3b8" font-size="11">
+            (The "inconsistency" between the artificial magnitude and random phase is reduced each step.)
+        </text>
+    </g>
+
+</svg>
