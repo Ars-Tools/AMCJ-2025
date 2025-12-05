@@ -9,8 +9,38 @@
             "modernui": 1
         },
         "classnamespace": "box",
-        "rect": [ 188.0, 112.0, 1000.0, 623.0 ],
+        "rect": [ 188.0, 112.0, 965.0, 801.0 ],
         "boxes": [
+            {
+                "box": {
+                    "activebgcolor": [ 0.6392156862745098, 0.6901960784313725, 0.5294117647058824, 1.0 ],
+                    "activebgoncolor": [ 1.0, 0.9725490196078431, 0.8313725490196079, 1.0 ],
+                    "id": "obj-54",
+                    "maxclass": "live.button",
+                    "numinlets": 1,
+                    "numoutlets": 1,
+                    "outlettype": [ "" ],
+                    "parameter_enable": 1,
+                    "patching_rect": [ 690.0, 330.0, 42.0, 42.0 ],
+                    "saved_attribute_attributes": {
+                        "activebgcolor": {
+                            "expression": ""
+                        },
+                        "activebgoncolor": {
+                            "expression": ""
+                        },
+                        "valueof": {
+                            "parameter_enum": [ "off", "on" ],
+                            "parameter_longname": "live.button",
+                            "parameter_mmax": 1,
+                            "parameter_modmode": 0,
+                            "parameter_shortname": "live.button",
+                            "parameter_type": 2
+                        }
+                    },
+                    "varname": "live.button"
+                }
+            },
             {
                 "box": {
                     "bgcolor": [ 0.2627450980392157, 0.33725490196078434, 0.38823529411764707, 1.0 ],
@@ -296,36 +326,6 @@
                     "outlettype": [ "" ],
                     "patching_rect": [ 495.0, 390.0, 90.0, 22.0 ],
                     "text": "r framesize"
-                }
-            },
-            {
-                "box": {
-                    "activebgcolor": [ 0.6392156862745098, 0.6901960784313725, 0.5294117647058824, 1.0 ],
-                    "activebgoncolor": [ 1.0, 0.9725490196078431, 0.8313725490196079, 1.0 ],
-                    "id": "obj-54",
-                    "maxclass": "live.button",
-                    "numinlets": 1,
-                    "numoutlets": 1,
-                    "outlettype": [ "" ],
-                    "parameter_enable": 1,
-                    "patching_rect": [ 690.0, 330.0, 42.0, 42.0 ],
-                    "saved_attribute_attributes": {
-                        "activebgcolor": {
-                            "expression": ""
-                        },
-                        "activebgoncolor": {
-                            "expression": ""
-                        },
-                        "valueof": {
-                            "parameter_enum": [ "off", "on" ],
-                            "parameter_longname": "live.button",
-                            "parameter_mmax": 1,
-                            "parameter_modmode": 0,
-                            "parameter_shortname": "live.button",
-                            "parameter_type": 2
-                        }
-                    },
-                    "varname": "live.button"
                 }
             },
             {
@@ -3389,6 +3389,14 @@
         "parameters": {
             "obj-54": [ "live.button", "live.button", 0 ],
             "obj-80": [ "live.gain~", "live.gain~", 0 ],
+            "parameterbanks": {
+                "0": {
+                    "index": 0,
+                    "name": "",
+                    "parameters": [ "-", "-", "-", "-", "-", "-", "-", "-" ],
+                    "buttons": [ "-", "-", "-", "-", "-", "-", "-", "-" ]
+                }
+            },
             "inherited_shortname": 1
         },
         "autosave": 0
