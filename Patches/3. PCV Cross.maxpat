@@ -9,7 +9,7 @@
             "modernui": 1
         },
         "classnamespace": "box",
-        "rect": [ 43.0, 93.0, 1113.0, 683.0 ],
+        "rect": [ 43.0, 93.0, 737.0, 683.0 ],
         "openinpresentation": 1,
         "boxes": [
             {
@@ -1387,7 +1387,8 @@
                             "modernui": 1
                         },
                         "classnamespace": "box",
-                        "rect": [ 34.0, 62.0, 1852.0, 984.0 ],
+                        "rect": [ 34.0, 93.0, 1372.0, 683.0 ],
+                        "visible": 1,
                         "boxes": [
                             {
                                 "box": {
@@ -2451,7 +2452,7 @@
                                     "numoutlets": 4,
                                     "outlettype": [ "signal", "signal", "signal", "signal" ],
                                     "patching_rect": [ 30.0, 45.0, 510.0, 22.0 ],
-                                    "text": "pcshift~ @window 4096 @rate 0.666667 1 1.5 2.25"
+                                    "text": "pcv.pitchshift~ @window 4096 @rate 0.666667 1 1.5 2.25"
                                 }
                             },
                             {
@@ -6401,14 +6402,6 @@
             "obj-8": [ "live.button[3]", "live.button", 0 ],
             "obj-85": [ "live.tab", "live.tab", 0 ],
             "obj-91": [ "Process Length", "Process Length", 0 ],
-            "parameterbanks": {
-                "0": {
-                    "index": 0,
-                    "name": "",
-                    "parameters": [ "-", "-", "-", "-", "-", "-", "-", "-" ],
-                    "buttons": [ "-", "-", "-", "-", "-", "-", "-", "-" ]
-                }
-            },
             "inherited_shortname": 1
         },
         "autosave": 0,
